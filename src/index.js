@@ -19,11 +19,11 @@ const router = createBrowserRouter([
   },
 ]);
 root.render(
-  <React.StrictMode>
+  <React.Fragment>
     <header>Second Hand</header>
     <RouterProvider router={router} />
     <footer>Hand made</footer>
-  </React.StrictMode>
+  </React.Fragment>
 );
 
 

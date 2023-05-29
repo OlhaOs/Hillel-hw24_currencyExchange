@@ -2,7 +2,18 @@ import { Link } from 'react-router-dom';
 import PriceRow from './PriceRow';
 import './ProductRow.css';
 
-function ProductRow({ id, title, category, price, currency, currencyExchange }) {
+function ProductRow({
+  id,
+  title,
+  category,
+  price,
+  currency,
+  currencyExchange,
+  addToCart,
+}) {
+  const handleAddtoCart = item => () => {
+    addToCart(item);
+  };
   return (
     <tr key={id}>
       <td>{title}</td>
@@ -18,6 +29,11 @@ function ProductRow({ id, title, category, price, currency, currencyExchange }) 
         <Link to={`details/${id}`}>
           <button className='detailsBtn'>Details</button>
         </Link>
+      </td>
+      <td>
+        <button className='detailsBtn' onClick={handleAddtoCart({ id, price })}>
+          Add to cart
+        </button>
       </td>
     </tr>
   );

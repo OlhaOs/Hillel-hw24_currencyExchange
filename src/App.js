@@ -9,6 +9,7 @@ function App({ currency: globalCurrency }) {
   const [listOfCategories, setOfCategories] = useState([]);
   const [currency, setCurrency] = useState(globalCurrency);
   const [currencyExchange, setcurrencyExchange] = useState('1');
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products/categories')
@@ -53,8 +54,20 @@ function App({ currency: globalCurrency }) {
       .catch(error => console.log('error', error));
   }, [currency]);
 
+  const addToCart = item => {
+    setCart([...cart, item]);
+
+    console.log(cart);
+  };
+
+  const totalCost = cart.reduce((acc, current) => {
+    return acc + current.price;
+  }, 0);
+
   return (
     <div className='app'>
+      <div>Total amount: {cart.length}</div>
+      <div>Total cost: {totalCost}</div>
       <form className='form'>
         <select
           value={categoryValue}
@@ -95,6 +108,7 @@ function App({ currency: globalCurrency }) {
                 currency={currency}
                 key={id}
                 currencyExchange={currencyExchange}
+                addToCart={addToCart}
               />
             );
           })}
